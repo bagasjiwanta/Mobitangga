@@ -1,10 +1,15 @@
-# tubes-alstrukdat
+# Tubes-alstrukdat
 ## Kelompok 14
 18220006 - Afkar Dhiya Ulhaq
+
 18220017 - Gratia Nindyaratri
+
 18220033 - Ayub Seipanya
+
 18220052 - Christopher Jie
+
 18220053 - I Putu Andika Bagas Jiwanta
+
 ## Links
 ### [spesifikasi](https://docs.google.com/document/d/1XWxnjQnzXTIRdKlBelEWgc1iY9Jr1rDI1yqxjHCr6B8/edit)
 ### [pembagian kelompok](https://docs.google.com/spreadsheets/d/1Fx_RR4-dQyG3h3XBkuxN-Hag7yqG9H7V4Y6J7VboUNk/edit#gid=1934939025)
