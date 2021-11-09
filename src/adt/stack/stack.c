@@ -1,8 +1,3 @@
-// Nama : I Putu Andika Bagas Jiwanta
-// NIM : 18220053 
-// Topik : Prapraktikum 4
-// Deskripsi : implementasi stack.h
-
 #include <stdio.h>
 #include "stack.h"
 

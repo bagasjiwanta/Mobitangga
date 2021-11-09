@@ -1,15 +1,13 @@
-/* File: mesinkar.h */
-/* Definisi Mesin Karakter */
-
 #ifndef __MESIN_KAR_H_
 #define __MESIN_KAR_H_
 
-#include "boolean.h"
+#include "../../boolean.h"
 
-#define MARK '.'
+#define MARK '\n'
 /* State Mesin */
 extern char CC;
 extern boolean EOP;
+extern boolean MBR;
 
 void START();
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.

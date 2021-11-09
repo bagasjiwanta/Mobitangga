@@ -1,5 +1,12 @@
-#include <stdio.h>
+#include "./adt/mesinkata/mesinkata.h"
+#include "./adt/map/map.h"
+#include "./functions.h"
+
+int defaultMaxRoll;
 
 int main(){
-    printf("Start game");
+    int a, b;
+    char c[101];
+    int d[200];
+    readConfig(&a, c, &b, d);
 }
