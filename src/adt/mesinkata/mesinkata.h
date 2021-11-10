@@ -1,13 +1,10 @@
-/* File: mesinkata.h */
-/* Definisi Mesin Kata: Model Akuisisi Versi I */
-
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "boolean.h"
+#include "../../boolean.h"
 #include "mesinkar.h"
 
-#define NMax 100
+#define NMax 101
 #define BLANK ' '
 
 typedef struct {
@@ -16,7 +13,6 @@ typedef struct {
 } Kata;
 
 /* State Mesin Kata */
-extern boolean EndKata;
 extern Kata CKata;
 
 void IgnoreBlank();
