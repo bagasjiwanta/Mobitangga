@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "./adt/queue/queue.h"
 
 void turn(player p, int *dadu, boolean *issudahkocok, int i)
 {   
