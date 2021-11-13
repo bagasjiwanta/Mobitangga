@@ -8,5 +8,5 @@ int main(){
     int a, b;
     char c[101];
     int d[200];
-    readConfig(&a, c, &b, d);
+    initGame(&a, c, &b, d);
 }
