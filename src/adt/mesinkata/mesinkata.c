@@ -23,8 +23,8 @@ void SalinKata(){
     CKata.Length = i;
 };
          
-void STARTKATA(){
-    START();
+void STARTKATA(const char* fileloc){
+    START(fileloc);
     IgnoreBlank();
     if (CC != MARK) {
         SalinKata();
