@@ -13,7 +13,7 @@ void logErrorThenExit (const char* error, const char* location) {
     exit(1);
 };
 
-void initGame (Map* map) {
+void initGame () {
     char choice;
     boolean endOperation = false;
     printf("\nSelamat datang di Game Ular Tangga Doraemonangis !!\n\n");
@@ -45,7 +45,7 @@ void initGame (Map* map) {
             } 
             fclose(file);
 
-            readConfig(baseloc, map);
+            readConfig(baseloc);
             // mengambil input jumlah pemain
             int jumlahPemain;
             printf("Masukkan jumlah pemain (2-4):\n> ");
@@ -66,7 +66,7 @@ void initGame (Map* map) {
             for (i = 0; i < jumlahPemain; i++){
                 printf("Masukkan nama pemain ke-%d:\n> ", i+1);
                 scanf("%s", &baseloc);
-                printf("Telah dibuat pemain bernama %s\n> ", baseloc);
+                printf("Telah dibuat pemain bernama %s\n", baseloc);
                 // CreateEmptyPlayer(baseloc);
             }
             endOperation = true;
@@ -81,7 +81,7 @@ void initGame (Map* map) {
     }
 };
 
-void readConfig (const char* fileloc, Map* map) {
+void readConfig (const char* fileloc) {
     int N; // panjang map
     int M; // jumlah teleporter
     int MaxRoll; // maksimum roll dadu
@@ -98,9 +98,7 @@ void readConfig (const char* fileloc, Map* map) {
         logErrorThenExit("Panjang peta harus diantara 2 dan 100", errorloc);
     } 
 
-    // mapConfig dialokasi
-    map->mapLength = N;
-    map->mapConfig = AllocMapConfig(N);
+    allocMap(N);
 
     // input dan validasi mapConfig
     ADVKATA();
@@ -120,7 +118,7 @@ void readConfig (const char* fileloc, Map* map) {
     if(i!=N-2){
         logErrorThenExit("Petak hanya boleh berisi karakter '#' atau '.'", errorloc);
     }
-    strcpy((map->mapConfig), CKata.TabKata);
+    strcpy((MAP->mapConfig), CKata.TabKata);
 
     // input dan validasi MaxRoll
     ADVKATA();
@@ -128,7 +126,7 @@ void readConfig (const char* fileloc, Map* map) {
     if (MaxRoll < 1 || MaxRoll > N - 1){
         logErrorThenExit("MaxRoll harus diantara 1 dan N - 1", errorloc);
     }
-    map->defaultMaxRoll = MaxRoll;
+    MAP->defaultMaxRoll = MaxRoll;
 
     // input dan validasi jumlah teleporter
     ADVKATA();
@@ -136,10 +134,6 @@ void readConfig (const char* fileloc, Map* map) {
     if (M < 1 || M > N - 2) {
         logErrorThenExit("Jumlah teleporter harus diantara 1 dan N - 2", errorloc);
     }
-
-    // alokasi array of teleporters
-    map->teleporters.TI = AllocTeleporters(M);
-    map->teleporters.Neff = M * 2;
 
     // input dan validasi teleporters
     for (i = 0 ; i < M ; i ++) {
@@ -156,7 +150,6 @@ void readConfig (const char* fileloc, Map* map) {
         if (src < 1 || dest < 1 || src > N || dest > N) {
             logErrorThenExit("Teleporter harus berada dalam map", errorloc);
         }
-        map->teleporters.TI[i*2] = src;
-        map->teleporters.TI[(i*2) + 1] = dest;
+        MAP->teleporters.TI[src] = dest;
     }
 };
