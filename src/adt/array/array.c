@@ -1,8 +1,3 @@
-// Nama : I Putu Andika Bagas Jiwanta
-// NIM : 18220053
-// Topik Praktikum : Pra-Praktikum 2
-// Deskripsi : array.h
-
 #include "array.h"
 #include <stdio.h>
 
@@ -56,4 +51,4 @@ boolean IsEmpty (TabInt T) {
 
 boolean IsFull (TabInt T) {
     return (T.Neff == (IdxMax - IdxMin + 1)) ;
-}
+} 
