@@ -6,6 +6,8 @@
 // Definisi Map
 // Map berisi panjang peta, konfigurasi peta, 
 // array of teleporters, dan default max roll
+// Indeks genap pada teleporters menandakan petak masuk teleporter
+// sedangkan index ganjil menandakan petak keluar teleporter
 typedef struct MapStruct {
     int mapLength;
     char* mapConfig;
@@ -13,20 +15,22 @@ typedef struct MapStruct {
     int defaultMaxRoll;
 } Map;
 
+extern Map* MAP;
+
 // Konstruktor Map
 // Mengalokasikan memori sebesar ukuran Map lalu direturn
-Map* CreateEmptyMap();
+void initMap();
 
-// Konstruktor properti map : mapConfig
-// Mengalokasikan memori sebesar panjang peta + 1 lalu di return
-char* AllocMapConfig(int n);
-
-// Konstruktor properti map : teleporters
-// Mengalokasikan memori sebesar jumlah petak masuk + petak keluar
-// Yaitu sebesar 2 * m
-int* AllocTeleporters(int m);
+// Inisialisasi Map
+// panjang peta di set N, lalu dialokasikan mapConfig
+// dan teleporters
+void allocMap(int N);
 
 // Destruktor
 // Melakukan dealokasi terhadap map yang sudah dialokasi
-void DeallocMap(Map* map);
+void deallocMap();
+
+// Menampilkan semua isi map untuk keperluan debugging
+void displayMapForDebugging();
+
 #endif // !__MAP_H__

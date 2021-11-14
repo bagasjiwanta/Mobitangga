@@ -5,9 +5,9 @@
 #include <stdlib.h>
 
 int main(){
-    Map* map = CreateEmptyMap();
-    initGame(map);
-    printf("%s", map->mapConfig);
-    DeallocMap(map);
+    initMap();
+    initGame();
+    // displayMapForDebugging();
+    deallocMap();
     return 0;
 }

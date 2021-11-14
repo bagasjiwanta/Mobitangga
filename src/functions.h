@@ -3,8 +3,8 @@
 
 void logErrorThenExit (const char* error, const char* location);
 
-void initGame (Map* map);
+void initGame ();
 
-void readConfig (const char* fileloc, Map* map);
+void readConfig (const char* fileloc);
 
 #endif // !__FUNCTIONS_H__ 
