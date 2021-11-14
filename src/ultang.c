@@ -1,6 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./adt/queue/queue.h"
+#include "functions.h"
+
+
+typedef struct
+{
+    char nama[10];
+    int letak;
+    int Urutan;
+    boolean Kalah;
+}Pemain;
+
+typedef struct
+{
+    pemain pem[5];
+    int jmlpemain;
+}player;
 
 void turn(player p, int *dadu, boolean *issudahkocok, int i)
 {   
@@ -10,37 +26,43 @@ void turn(player p, int *dadu, boolean *issudahkocok, int i)
     printf("-----Turn %d-----\n", i);
     giliran=((i-1)%p.jmlpemain)+1;
     printf("Giliran : %s\n", p.pem[giliran].nama);
-    printf("tekan untuk mengocok dadu!");
+    printf("Masukkan command: ");
     if(!(*issudahkocok)) 
     {   
         scanf(" %c", &pilihan); //asumsi dadu hanya 1 buah
+        while(pilihan != "ROLL"){
+        	printf("Command salah!");
+        }
         *dadu = rand()% 6 + 1;
         *issudahkocok=true;
     }
-    tdadu=*dadu
-    printf("\nDadu 1 : %d\n", *dadu);
-    printf("%s maju sebanyak %d langkah\n", p.pem[giliran].nama, tdadu);
-    //perlu kondisi dari map yang # bakal diam.
+    tdadu=*dadu;
+    printf("\nDadu  : %d\n", *dadu);
+    printf("%s mendapatkan angka %d. \n", p.pem[giliran].nama, tdadu);
+    if(CKata.TabKata[i+tdadu] == '#' and CKata.TabKata[i-tdadu] == '#'){
+    	printf("%s tidak dapat bergerak. \n",p.pem[giliran].nama);
+	}
+	else if (CKata.TabKata[i+tdadu] == '.'and CKata.TabKata[i-tdadu] == '#') {
+		printf("%s dapat maju. \n",p.pem[giliran].nama);
+		printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
+		printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i+tdadu]);
+	}
+	else if (CKata.TabKata[i-tdadu] == '.'and CKata.TabKata[i+tdadu] == '#') {
+		printf("%s dapat mundur. \n",p.pem[giliran].nama);
+		printf("%s mundur %d langkah. \n",p.pem[giliran].nama, tdadu);
+		printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i-tdadu]);
+	}
+	else{
+		printf("%s dapat maju. \n",p.pem[giliran].nama);
+		printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
+		printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i+tdadu]);
+	}	
+}
+boolean F_IsPemainEmpty(T_Pemain V_Pemain)
+{
+    return (strcmp(V_Pemain.nama, "")==0);
 }
 
-boolean ispemainempty(pemain p)
-{
-    return (strcmp(p.nama, "")==0);
-}
-
-void insertjumlahpemain(player *p, Queue *Q)
-{
-    int i;
-    printf("Jumlah pemain : ");
-    scanf("%d", &(*p).jmlpemain);
-    CreateEmpty(&(*Q), (*p).jmlpemain);
-    for(i=1;i<=(*p).jmlpemain;i++)
-    {
-        printf("Nama Pemain %d : ", i);
-        scanf("%s", &(*p).pem[i].nama);
-        Add(&(*Q), i);
-    }
-}
 
 void ChangeTurn(Queue *Q)
 {
@@ -49,3 +71,24 @@ void ChangeTurn(Queue *Q)
 	Del(&(*Q), &X);
 	Add(&(*Q), X);
 }
+void statuspemain(player play) 
+{
+    int i;
+    printf("****** STATUS PEMAIN ******\n");
+    for(i=1;i<=4;i++)
+    {
+        if(strcmp("",play.pem[i].nama)!=0)
+        {
+            printf("-----%s-----\n", play.pem[i].nama);
+            printf("Letak pemain di petak : %d\n", play.pem[i].letak);
+        }
+    }
+}
+void pemenang (player pl)
+{
+	if(pl == CKata.TabKata[CKata.Length - 1])
+	{
+		printf("==========SELAMAT ANDA MENJADI PEMENANG DARI GAME INI!!!==========");
+	}
+}
+
