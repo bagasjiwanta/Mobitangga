@@ -26,4 +26,4 @@
 
 ### [FAQ](https://docs.google.com/spreadsheets/d/1x8gRN62DG1BRMDyFFmQIkQuZEpNUeRpXVTaZmZqIBDA/edit#gid=0)
 
-gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c -o main.exe
+gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/array/array.c -o main.exe

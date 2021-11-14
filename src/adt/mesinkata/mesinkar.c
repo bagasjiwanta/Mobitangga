@@ -34,7 +34,7 @@ void ADV()
     if (retval < 0)
     {
         if (!MBR) {
-            logErrorThenExit("Argumen terlalu sedikit", "konfigurasi.txt");
+            logErrorThenExit("Argumen terlalu sedikit", "mesin kata");
         }
         EOP = true;
         fclose(pita);
