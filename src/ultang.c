@@ -39,23 +39,27 @@ void turn(player p, int *dadu, boolean *issudahkocok, int i)
     tdadu=*dadu;
     printf("\nDadu  : %d\n", *dadu);
     printf("%s mendapatkan angka %d. \n", p.pem[giliran].nama, tdadu);
-    if(CKata.TabKata[i+tdadu] == '#' and CKata.TabKata[i-tdadu] == '#'){
+    if(CKata.TabKata[i+tdadu] == '#' and CKata.TabKata[i-tdadu] == '#')
+    	{
     	printf("%s tidak dapat bergerak. \n",p.pem[giliran].nama);
 	}
-	else if (CKata.TabKata[i+tdadu] == '.'and CKata.TabKata[i-tdadu] == '#') {
-		printf("%s dapat maju. \n",p.pem[giliran].nama);
-		printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
-		printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i+tdadu]);
+    else if (CKata.TabKata[i+tdadu] == '.'and CKata.TabKata[i-tdadu] == '#') 
+    	{
+	printf("%s dapat maju. \n",p.pem[giliran].nama);
+	printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
+	printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i+tdadu]);
 	}
-	else if (CKata.TabKata[i-tdadu] == '.'and CKata.TabKata[i+tdadu] == '#') {
-		printf("%s dapat mundur. \n",p.pem[giliran].nama);
-		printf("%s mundur %d langkah. \n",p.pem[giliran].nama, tdadu);
-		printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i-tdadu]);
+    else if (CKata.TabKata[i-tdadu] == '.'and CKata.TabKata[i+tdadu] == '#')
+    	{
+	printf("%s dapat mundur. \n",p.pem[giliran].nama);
+	printf("%s mundur %d langkah. \n",p.pem[giliran].nama, tdadu);
+	printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i-tdadu]);
 	}
-	else{
-		printf("%s dapat maju. \n",p.pem[giliran].nama);
-		printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
-		printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i+tdadu]);
+    else
+    	{
+	printf("%s dapat maju. \n",p.pem[giliran].nama);
+	printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
+	printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i+tdadu]);
 	}	
 }
 boolean F_IsPemainEmpty(T_Pemain V_Pemain)
