@@ -7,7 +7,7 @@
 int main(){
     initMap();
     initGame();
-    displayMapForDebugging();
+    // displayMapForDebugging();
     deallocMap();
     return 0;
 }
