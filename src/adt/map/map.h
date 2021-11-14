@@ -9,8 +9,7 @@
 // Indeks genap pada teleporters menandakan petak masuk teleporter
 // sedangkan index ganjil menandakan petak keluar teleporter
 typedef struct MapStruct {
-    int mapLength;
-    char* mapConfig;
+    TabChar mapConfig;
     TabInt teleporters;
     int defaultMaxRoll;
 } Map;
@@ -32,5 +31,8 @@ void deallocMap();
 
 // Menampilkan semua isi map untuk keperluan debugging
 void displayMapForDebugging();
+
+// membaca file konfigurasi
+void readMap (const char* fileloc);
 
 #endif // !__MAP_H__

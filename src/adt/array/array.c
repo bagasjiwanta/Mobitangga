@@ -21,7 +21,7 @@ IdxType GetLastIdx (TabInt T) {
     return T.Neff ;
 }
 
-ElType GetElmt (TabInt T, IdxType i) {
+int GetElmt (TabInt T, IdxType i) {
     return (T.TI[i]) ;
 }
 
@@ -29,7 +29,7 @@ void SetTab (TabInt Tin, TabInt *Tout) {
     *Tout = Tin ;
 }
 
-void SetEl (TabInt *T, IdxType i, ElType v) {
+void SetEl (TabInt *T, IdxType i, int v) {
     (*T).TI[i] = v ;
 }
 
