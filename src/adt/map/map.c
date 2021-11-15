@@ -1,8 +1,11 @@
 #include "map.h"
 #include "../array/array.h"
 #include "../mesinkata/mesinkata.h"
+#include "../../functions.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "../../boolean.h"
+#include <string.h>
 
 Map* MAP;
 
@@ -11,7 +14,7 @@ void initMap(){
 }
 
 void allocMap(int N){
-    MAP->mapConfig.TI = (char*) malloc (sizeof(char) * N + 1);
+    MAP->mapConfig.TI = (char*) malloc (sizeof(char) * N + 3);
     MAP->mapConfig.Neff = N;
     MAP->teleporters.TI = (int*) malloc (sizeof(int) * N + 1);
     MAP->teleporters.Neff = N;
@@ -27,7 +30,7 @@ void deallocMap(){
 
 void displayMapForDebugging(){
     printf("\n----Menampilkan map----\nPanjang peta: %d\n", MAP->mapConfig.Neff);
-    printf("Konfigurasi peta: %s\n", MAP->mapConfig.TI);
+    printf("Konfigurasi peta: %s\n", MAP->mapConfig.TI + 1);
     printf("Default Max Roll: %d\n", MAP->defaultMaxRoll);
     printf("Isi teleporters:\n");
     int x;
@@ -45,7 +48,7 @@ void readMap (const char* fileloc) {
     int i, j; // iterator
     const char* errorloc = "file konfigurasi"; // keperluan error logging
 
-    STARTKATA(fileloc);
+    STARTKATA(fileloc, false);
 
     N = atoi(CKata.TabKata);
     allocMap(N);
@@ -67,7 +70,8 @@ void readMap (const char* fileloc) {
     if(i != N - 2){
         logErrorThenExit("Petak hanya boleh berisi karakter '#' atau '.'", errorloc);
     }
-    strcpy((MAP->mapConfig.TI), CKata.TabKata);
+    strcpy((MAP->mapConfig.TI), "|");
+    strcat((MAP->mapConfig.TI), CKata.TabKata);
 
     // input MaxRoll
     ADVKATA();

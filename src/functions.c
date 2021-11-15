@@ -12,6 +12,7 @@ void logErrorThenExit (const char* error, const char* location) {
 };
 
 void initGame () {
+    initMap();
     char choice;
     boolean endOperation = false;
     printf("\nSelamat datang di Game Ular Tangga Doraemonangis !!\n\n");
@@ -29,7 +30,7 @@ void initGame () {
 
             // menerima input file konfigurasi untuk yang pertama kali
             printf("Masukkan nama file konfigurasi yang ingin di load (pastikan sudah ada di folder ./public/):\n> ");
-            scanf("%s", &fileloc);
+            scanf("%s", fileloc);
             strcat(baseloc, fileloc);
 
             // memastikan file exist sebelum di proses     
@@ -37,7 +38,7 @@ void initGame () {
                 fclose(file);
                 printf("Nama file tidak ditemukan\n");
                 printf("Masukkan kembali nama file konfigurasi yang ingin di load (pastikan sudah ada di folder ./public/):\n> ");
-                scanf("%s", &fileloc);
+                scanf("%s", fileloc);
                 strcpy(baseloc, "./public/");
                 strcat(baseloc, fileloc);
             } 
@@ -63,7 +64,7 @@ void initGame () {
             int i;
             for (i = 0; i < jumlahPemain; i++){
                 printf("Masukkan nama pemain ke-%d:\n> ", i+1);
-                scanf("%s", &baseloc);
+                scanf("%s", baseloc);
                 printf("Telah dibuat pemain bernama %s\n", baseloc);
                 // CreateEmptyPlayer(baseloc);
             }

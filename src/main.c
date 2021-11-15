@@ -5,8 +5,12 @@
 #include <stdlib.h>
 
 int main(){
-    initMap();
     initGame();
+    /*
+
+        Game Loop disini
+
+    */
     // displayMapForDebugging();
     deallocMap();
     return 0;
