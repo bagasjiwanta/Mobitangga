@@ -15,13 +15,18 @@
 
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;
-typedef int ElType;
 
 typedef struct 
 {
-	ElType* TI; /* memori tempat penyimpan elemen (container) */
+	int* TI; /* memori tempat penyimpan elemen (container) */
 	int Neff; /* banyaknya elemen efektif */
 } TabInt;
+
+typedef struct 
+{
+	char* TI;
+	int Neff;
+} TabChar;
 
 /* Indeks yang digunakan [IdxMin..IdxMax] */
 /* Jika T adalah TabInt, cara deklarasi dan akses: */
@@ -60,7 +65,7 @@ IdxType GetLastIdx (TabInt T);
 /* *** Menghasilkan sebuah elemen *** */
 /* Prekondisi : Tabel tidak kosong, i antara FirstIdx(T)..LastIdx(T) */
 /* Mengirimkan elemen tabel yang ke-i */
-ElType GetElmt (TabInt T, IdxType i);
+int GetElmt (TabInt T, IdxType i);
 
 /* *** Selektor SET : Mengubah nilai TABEL dan elemen tabel *** */
 /* Untuk type private/limited private pada bahasa tertentu */
@@ -68,7 +73,7 @@ void SetTab (TabInt Tin, TabInt *Tout);
 /* I.S. Tin terdefinisi, sembarang */
 /* F.S. Tout berisi salinan Tin */
 /* Assignment THsl -> Tin */
-void SetEl (TabInt *T, IdxType i, ElType v);
+void SetEl (TabInt *T, IdxType i, int v);
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Elemen T yang ke-i bernilai v */
 /* Mengeset nilai elemen tabel yang ke-i sehingga bernilai v */

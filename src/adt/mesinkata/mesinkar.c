@@ -14,9 +14,13 @@ static int retval;
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
    F.S. : CC adalah karakter pertama pada pita. EOP dijadikan false */
-void START(const char* fileloc)
+void START(const char* fileloc, boolean isStdin)
 {
-    pita = fopen(fileloc, "r");
+    if(isStdin){
+        pita = stdin;
+    } else {
+        pita = fopen(fileloc, "r");
+    }
     EOP = false;
     MBR = false;
     ADV();

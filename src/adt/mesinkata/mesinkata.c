@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "mesinkata.h"
+#include "../../boolean.h"
 
 Kata CKata;
 void IgnoreBlank(){
@@ -23,8 +24,8 @@ void SalinKata(){
     CKata.Length = i;
 };
          
-void STARTKATA(const char* fileloc){
-    START(fileloc);
+void STARTKATA(const char* fileloc, boolean isStdin){
+    START(fileloc, isStdin);
     IgnoreBlank();
     if (CC != MARK) {
         SalinKata();

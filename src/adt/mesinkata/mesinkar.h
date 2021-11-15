@@ -9,7 +9,7 @@ extern char CC;
 extern boolean EOP;
 extern boolean MBR;
 
-void START(const char* fileloc);
+void START(const char* fileloc, boolean isStdin);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
