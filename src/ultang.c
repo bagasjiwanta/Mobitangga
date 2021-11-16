@@ -21,7 +21,7 @@ typedef struct
 void turn(player p, int *dadu, boolean *issudahkocok, int i)
 {   
     int giliran, tdadu; 
-    char pilihan;
+    char pilihan,majumundur;
 
     printf("-----Turn %d-----\n", i);
     giliran=((i-1)%p.jmlpemain)+1;
@@ -57,9 +57,18 @@ void turn(player p, int *dadu, boolean *issudahkocok, int i)
 	}
 	else
 	{
-		printf("%s dapat maju. \n",p.pem[giliran].nama);
-		printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
-		printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i+tdadu]);
+		printf("%s dapat maju dan mundur. \n",p.pem[giliran].nama);
+		printf("Pilih maju/mundur \n")
+		scanf(" %c", &majumundur);
+		if(majumundur == "maju"){
+			printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
+			printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i+tdadu]);
+		}
+		else if(majumundur == "mundur"){
+			printf("%s mundur %d langkah. \n",p.pem[giliran].nama, tdadu);
+			printf("%s berada di petak %d. \n",p.pem[giliran].nama, CKata.TabKata[i-tdadu]);
+		}
+		
 	}	
 }
 boolean F_IsPemainEmpty(T_Pemain V_Pemain)
