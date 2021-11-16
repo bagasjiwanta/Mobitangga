@@ -58,7 +58,7 @@ void turn(player p, int *dadu, boolean *issudahkocok, int i)
 	else
 	{
 		printf("%s dapat maju dan mundur. \n",p.pem[giliran].nama);
-		printf("Pilih maju/mundur \n")
+		printf("Pilih maju/mundur \n");
 		scanf(" %c", &majumundur);
 		if(majumundur == "maju"){
 			printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
