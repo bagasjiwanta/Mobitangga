@@ -29,11 +29,7 @@ void turn(player p, int *dadu, boolean *issudahkocok, int i)
     printf("Masukkan command: ");
     if(!(*issudahkocok)) 
     {   
-        scanf(" %c", &pilihan); //asumsi dadu hanya 1 buah
-        while(pilihan != "ROLL"){
-        	printf("Command salah!");
-        }
-        *dadu = rand()% 6 + 1;
+        *dadu = rand()% 6 + 1;  //asumsi dadu hanya 1 buah
         *issudahkocok=true;
     }
     tdadu=*dadu;
