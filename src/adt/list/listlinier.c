@@ -1,5 +1,4 @@
 #include "listlinier.h"
-#include "boolean.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -9,7 +8,7 @@
 	Topik 	: Praktikum 5, nomor 2
 */
 
-boolean IsEmpty (List L){
+boolean IsListEmpty (List L){
   	return First(L) == NULL;
 };
 
@@ -87,7 +86,7 @@ void InsertAfter (List *L, address P, address Prec) {
 
 void InsertLast (List *L, address P) {
 	address x = First(*L);
-    if(IsEmpty(*L)) { 
+    if(IsListEmpty(*L)) { 
         InsertFirst(L, P);
     } else {
 	    while (Next(x) != Nil) { 
@@ -166,7 +165,7 @@ void DelAfter (List *L, address *Pdel, address Prec){
 void PrintInfo (List L){
     address P;
     printf("[");
-    if (!IsEmpty(L)) {
+    if (!IsListEmpty(L)) {
         P = First(L);
         do {
             printf("%d", Info(P));
@@ -179,7 +178,7 @@ void PrintInfo (List L){
     printf("]");
 }
 
-int NbElmt (List L){
+int NbElmtList (List L){
     int count;
     address P;
     count = 0;
@@ -207,7 +206,7 @@ infotype Max (List L){
 
 void Konkat1 (List *L1, List *L2, List *L3){
     CreateEmpty(L3);
-    if (IsEmpty(*L1)==false) {
+    if (IsListEmpty(*L1)==false) {
         address P = First(*L1);
         First(*L3) = P;
         while (Next(P) != Nil) {

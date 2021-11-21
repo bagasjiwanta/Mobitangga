@@ -7,7 +7,6 @@
 // Map berisi mapConfig : konfigurasi peta;
 // teleporters : array of teleporter, dan
 // defaultMaxRoll : max roll yang default.
-// 
 typedef struct MapStruct {
     TabChar mapConfig;
     TabInt teleporters;

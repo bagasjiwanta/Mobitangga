@@ -1,9 +1,16 @@
+#include "./adt/player/player.h"
 #include <stdlib.h> 
 #include <stdio.h>
 #include <string.h>
 #include "./adt/map/map.h"
 #include "functions.h"
 #include "boolean.h"
+#include <time.h>
+
+// mengembalikan random number dari 0 sampai maxDigit (inclusive)
+int random(int maxDigit){
+    return rand() % maxDigit;
+}
 
 // menuliskan error ke output, lalu force exit
 void logErrorThenExit (const char* error, const char* location) {
@@ -12,6 +19,8 @@ void logErrorThenExit (const char* error, const char* location) {
 };
 
 void initGame () {
+    time_t myTime;
+    srand((unsigned) time(&myTime));
     initMap();
     char choice;
     boolean endOperation = false;
@@ -62,11 +71,16 @@ void initGame () {
             }
 
             int i;
-            for (i = 0; i < jumlahPemain; i++){
-                printf("Masukkan nama pemain ke-%d:\n> ", i+1);
-                scanf("%s", baseloc);
-                printf("Telah dibuat pemain bernama %s\n", baseloc);
-                // CreateEmptyPlayer(baseloc);
+            for (i = 1; i <= jumlahPemain; i++){
+                printf("Masukkan nama pemain ke-%d (maksimal 20 karakter): ", i);
+                getchar();
+                scanf("%[^\n]", &baseloc);
+                while(strlen(baseloc) > 20){
+                    printf("Masukkan kembali nama pemain ke-%d (maksimal 20 karakter): ", i);
+                    getchar();
+                    scanf("%[^\n]", &baseloc);
+                }
+                CreatePlayer(baseloc, i);
             }
             endOperation = true;
         } else if (choice == 'e') {
