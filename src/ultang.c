@@ -98,6 +98,8 @@ void statuspemain(player play)
 }
 void pemenang (player pl)
 {
+	STARTKATA(fileloc, false);
+        ADVKATA();
 	if(pl == CKata.TabKata[CKata.Length - 1])
 	{
 		printf("==========SELAMAT ANDA MENJADI PEMENANG DARI GAME INI!!!==========");
