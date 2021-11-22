@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "./adt/queue/queue.h"
 #include "./adt/mesinkata/mesinkata.h"
+#include "./adt/list/listlinier.h"
 #include "functions.h"
 
 
@@ -11,6 +12,7 @@ typedef struct
     int letak;
     int Urutan;
     boolean Kalah;
+    List skill;
 }Pemain;
 
 typedef struct
