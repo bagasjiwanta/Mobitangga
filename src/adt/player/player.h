@@ -30,12 +30,6 @@ void initPlayers(int numberOfPlayers);
 
 void CreatePlayer(char* name, int playerIndex);
 
-void commandInspect(int at);
-
-void commandSkill(int playerIndex);
-
-void commandMap();
-
 void giveAllPlayersRandomSkill();
 
 #endif // !__PLAYER_H__

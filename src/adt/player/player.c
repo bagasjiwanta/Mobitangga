@@ -23,28 +23,6 @@ void initPlayers(int numberOfPlayers){
     }
 };
 
-void commandMap(){
-    char* temp = (char*) malloc (sizeof(char) * MAP->mapConfig.Neff + 2);
-    strcpy(temp, MAP->mapConfig.TI);
-    int i, x;
-    for(i=1;i<=PLAYERS.NEff;i++){
-        x = playerNo(i).position;
-        temp[x] = '*';
-        printf("%s\t\t: %s\n", playerNo(i).name, temp+1);
-        temp[x] = MAP->mapConfig.TI[x];
-    }
-    free(temp);
-}
-
-void commandInspect(int at){
-    if(MAP->mapConfig.TI[at] == '#'){
-        printf("Petak %d merupakan petak terlarang", at);
-    } else if (MAP->teleporters.TI[at] != 0) {
-        printf("Petak %d memiliki teleporter menuju %d", at, MAP->teleporters.TI[at]);
-    } else {
-        printf("Petak %d merupakan petak kosong", at);
-    }
-}
 
 void CreatePlayer(char* name, int playerIndex){
     int i, j;
@@ -57,61 +35,6 @@ void CreatePlayer(char* name, int playerIndex){
     playerNo(i).skillCount = 0;
     PLAYERS.NEff ++;
 };
-
-void useSkill(int playerIndex, int skillIndex){
-    printf("grat\n");
-};
-
-void commandSkill(int playerIndex){ 
-    boolean counter[] = {0, 0, 0, 0, 0};
-    int availables[] = {-1, -1, -1, -1, -1};
-    boolean isGonnaUse = false;
-    int i, j;
-    address p;
-    p = playerNo(playerIndex).skill.First;
-    while(p != Nil){
-        counter[p->info - 1] = true;
-        p = p->next;
-    }
-    j = 1;
-    printf("Kamu memiliki skill: \n");
-    for(i=0;i<5;i++){
-        if(counter[i] != 0){
-            printf("  %d. %s\n", j, SkillNames[i]);
-            availables[j-1] = i;
-            j++;
-        }
-    }
-    for(i=0;i<5;i++){
-        printf("(%d)", availables[i]);
-    }
-    printf("\nTekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill."
-    "\n\nMasukkan skill: ");
-    scanf("%d", &j);
-    while(j < -7 && j > 7){
-        printf("Masukkan skill kembali: ");
-        scanf("%d", j);
-    }
-    if(j == 0){
-        printf("Berhasil keluar hehe\n");
-        return;
-    } else {
-        isGonnaUse = j > 0;
-        j = abs(j);
-        if(availables[j-1] == -1){
-            printf("Anda tidak memiliki skill ini\n");
-            return;
-        } else {
-            printf("%s ", playerNo(playerIndex).name);
-            if(isGonnaUse){ printf("memakai"); } else { printf("membuang"); }
-            printf(" skill %s.\n", SkillNames[availables[j-1]]);
-            if(isGonnaUse){
-                useSkill(playerIndex, j);
-            }
-            DelP(&(playerNo(playerIndex).skill), availables[j-1] + 1);
-        }
-    }
-}
 
 void giveAllPlayersRandomSkill(){
     int i, j, x;
