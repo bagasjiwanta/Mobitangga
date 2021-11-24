@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "./adt/queue/queue.h"
 #include "./adt/mesinkata/mesinkata.h"
+#include "./adt/list/listlinier.h"
 #include "functions.h"
 
 
@@ -11,6 +12,7 @@ typedef struct
     int letak;
     int Urutan;
     boolean Kalah;
+    List skill;
 }Pemain;
 
 typedef struct
@@ -36,6 +38,8 @@ void turn(player p, int *dadu, boolean *issudahkocok, int i)
     tdadu=*dadu;
     printf("\nDadu  : %d\n", *dadu);
     printf("%s mendapatkan angka %d. \n", p.pem[giliran].nama, tdadu);
+    STARTKATA(fileloc, false);
+    ADVKATA();
     if(CKata.TabKata[i+tdadu] == '#' and CKata.TabKata[i-tdadu] == '#')
 	{
     	printf("%s tidak dapat bergerak. \n",p.pem[giliran].nama);
@@ -96,6 +100,8 @@ void statuspemain(player play)
 }
 void pemenang (player pl)
 {
+	STARTKATA(fileloc, false);
+        ADVKATA();
 	if(pl == CKata.TabKata[CKata.Length - 1])
 	{
 		printf("==========SELAMAT ANDA MENJADI PEMENANG DARI GAME INI!!!==========");
