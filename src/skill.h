@@ -8,7 +8,7 @@
 
 boolean PintuGaKemanaMana;
 
-boolean CerminPengganda;
+boolean Cerminpengganda;
 
 boolean SenterPembesarHoki;
 

@@ -7,29 +7,20 @@
 
 int main(){
     initGame();
-    /*
-
-        Game Loop disini
-
-    */
-    // displayMapForDebugging();
-    initSkillNames();
-    int i;
-    for(i=0;i<6;i++){
-        printf("%s\n", SkillNames[i]);
+    giveAllPlayersRandomSkill();
+    giveAllPlayersRandomSkill();
+    giveAllPlayersRandomSkill();
+    commandMap();
+    
+    int temp;
+    scanf("%d", &temp);
+    while(temp > 0 && temp <= MAP->mapConfig.Neff){
+        commandInspect(temp);
+        scanf("%d", &temp);
     }
-    printf("%s", PLAYERS.players[0].name);
-    givePlayersRandomSkill();
-    givePlayersRandomSkill();
-    givePlayersRandomSkill();
-    givePlayersRandomSkill();
-    givePlayersRandomSkill();
-    givePlayersRandomSkill();
-    givePlayersRandomSkill();
-    givePlayersRandomSkill();
-    i = getSkills(1);
-    printf("\n(%d)", i);
-    deallocSkillNames();
+
+    commandSkill(1);
+    commandSkill(1);
     deallocMap();
     return 0;
-}
+ }

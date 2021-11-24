@@ -1,96 +1,49 @@
 #include "player.h"
+#include "../map/map.h"
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-/*
-#include "listdp.h"
-#include <stdio.h>
-
-address addressAt(List L, int x){
-    address p = First(L);
-    int i = 1;
-    while(i < x){
-        p = Next(p);
-        i++;
-    }
-    return p;
-}
-
-int main() {
-    int a, b, i, j;
-    List L;
-    address p;
-    scanf("%d", &a);
-    CreateEmpty(&L);
-    int sum = 0;
-    int count = 0;
-
-    for(i=0;i<6;i++){
-        InsVLast(&L, 0);
-    }
-
-    for(i=0;i<a;i++){
-        scanf("%d", &b);
-        if(b>0) {
-            if(count != 10){
-                sum += b;
-                count ++;
-                p = addressAt(L, b);
-                Info(p) ++;
-                printf("%d %d\n", count, sum);
-            } else {
-                printf("Skill penuh\n");
-            }
-        } else {
-            b = b * (-1);
-            p = addressAt(L, b);
-            if(Info(p) == 0){
-                printf("Tidak ada skill\n");
-            } else {
-                p = addressAt(L, b);
-                Info(p) --;
-                count--;
-                sum -= b;
-                printf("%d %d\n", count, sum);
-            }
-        }
-    }
-}
-*/
-
 Players PLAYERS;
 
-char** SkillNames;
-
+const char* SkillNames[] = {
+    "Pintu Ga Ke Mana Mana",
+    "Cermin Pengganda",
+    "Senter Pembesar Hoki",
+    "Senter Pengecil Hoki",
+    "Mesin Penukar Posisi",
+    "Teknologi Gagal"
+};
 
 void initPlayers(int numberOfPlayers){
     PLAYERS.NEff = numberOfPlayers;
     int i;
     for(i=1;i<=numberOfPlayers;i++){
-        CreateEmpty(&(playerNo(i).skills));
+        CreateEmpty(&(playerNo(i).skill));
     }
+};
+
+void commandMap(){
+    char* temp = (char*) malloc (sizeof(char) * MAP->mapConfig.Neff + 2);
+    strcpy(temp, MAP->mapConfig.TI);
+    int i, x;
+    for(i=1;i<=PLAYERS.NEff;i++){
+        x = playerNo(i).position;
+        temp[x] = '*';
+        printf("%s\t\t: %s\n", playerNo(i).name, temp+1);
+        temp[x] = MAP->mapConfig.TI[x];
+    }
+    free(temp);
 }
 
-void initSkillNames(){
-    SkillNames = (char**) malloc (sizeof(char*) * 6); 
-
-    SkillNames[0] = (char*) malloc (sizeof(char) * 22);
-    strcpy(SkillNames[0], "Pintu Ga Ke Mana Mana");
-    SkillNames[1] = (char*) malloc (sizeof(char) * 22);
-    strcpy(SkillNames[1], "Cermin Pengganda");
-    SkillNames[2] = (char*) malloc (sizeof(char) * 22);
-    strcpy(SkillNames[2], "Senter Pembesar Hoki");
-    SkillNames[3] = (char*) malloc (sizeof(char) * 22);
-    strcpy(SkillNames[3], "Senter Pengecil Hoki");
-    SkillNames[4] = (char*) malloc (sizeof(char) * 22);
-    strcpy(SkillNames[4], "Mesin Penukar Posisi");
-    SkillNames[5] = (char*) malloc (sizeof(char) * 22);
-    strcpy(SkillNames[5], "Teknologi Gagal");
-}
-
-void deallocSkillNames(){
-    free(SkillNames);
+void commandInspect(int at){
+    if(MAP->mapConfig.TI[at] == '#'){
+        printf("Petak %d merupakan petak terlarang", at);
+    } else if (MAP->teleporters.TI[at] != 0) {
+        printf("Petak %d memiliki teleporter menuju %d", at, MAP->teleporters.TI[at]);
+    } else {
+        printf("Petak %d merupakan petak kosong", at);
+    }
 }
 
 void CreatePlayer(char* name, int playerIndex){
@@ -100,39 +53,92 @@ void CreatePlayer(char* name, int playerIndex){
     for(i=0;i<4;i++){
         playerNo(playerIndex).buffs[i] = 0;
     }
-    
-    for(j=0;j<6;j++){
-        InsVFirst(&(playerNo(playerIndex).skills), 0);
-    }
+    CreateEmpty(&(playerNo(playerIndex).skill));
     playerNo(i).skillCount = 0;
-
     PLAYERS.NEff ++;
-}
+};
 
-int getSkills(int playerIndex){
-    int skillArray = 1000000;
-    int i;
-    address p = playerNo(playerIndex).skills.First;
-    for(i=0;i<6;i++){
-        skillArray += (p->info) * ((int) powf(10, 6-i-1));
+void useSkill(int playerIndex, int skillIndex){
+    printf("grat\n");
+};
+
+void commandSkill(int playerIndex){ 
+    boolean counter[] = {0, 0, 0, 0, 0};
+    int availables[] = {-1, -1, -1, -1, -1};
+    boolean isGonnaUse = false;
+    int i, j;
+    address p;
+    p = playerNo(playerIndex).skill.First;
+    while(p != Nil){
+        counter[p->info - 1] = true;
         p = p->next;
     }
-    return skillArray;
-}
-
-void givePlayersRandomSkill(){
-    int i, j, x;
-    address p;
-    for(i=1;i<=NumOfPlayers;i++){
-        if(!(playerNo(i).skillCount >= 10)){
-            x = random(5) + 1;
-            p = playerNo(i).skills.First;
-            for(j=1;j<x;j++){
-                p = p->next;
+    j = 1;
+    printf("Kamu memiliki skill: \n");
+    for(i=0;i<5;i++){
+        if(counter[i] != 0){
+            printf("  %d. %s\n", j, SkillNames[i]);
+            availables[j-1] = i;
+            j++;
+        }
+    }
+    for(i=0;i<5;i++){
+        printf("(%d)", availables[i]);
+    }
+    printf("\nTekan 0 untuk keluar. Masukkan bilangan negatif untuk membuang skill."
+    "\n\nMasukkan skill: ");
+    scanf("%d", &j);
+    while(j < -7 && j > 7){
+        printf("Masukkan skill kembali: ");
+        scanf("%d", j);
+    }
+    if(j == 0){
+        printf("Berhasil keluar hehe\n");
+        return;
+    } else {
+        isGonnaUse = j > 0;
+        j = abs(j);
+        if(availables[j-1] == -1){
+            printf("Anda tidak memiliki skill ini\n");
+            return;
+        } else {
+            printf("%s ", playerNo(playerIndex).name);
+            if(isGonnaUse){ printf("memakai"); } else { printf("membuang"); }
+            printf(" skill %s.\n", SkillNames[availables[j-1]]);
+            if(isGonnaUse){
+                useSkill(playerIndex, j);
             }
-            p->info ++;
-            playerNo(i).skillCount ++;
+            DelP(&(playerNo(playerIndex).skill), availables[j-1] + 1);
         }
     }
 }
 
+void giveAllPlayersRandomSkill(){
+    int i, j, x;
+    address p;
+    for(i=1;i<=NumOfPlayers;i++){
+        if(!(playerNo(i).skillCount >= 10)){
+            x = random(20) + 1;
+            if(x < 4){
+                x = 1;
+            } else if (x < 6) {
+                x = 2;
+            } else if (x < 9) {
+                x = 3;
+            } else if (x < 12) {
+                x = 4;
+            } else if (x < 13) {
+                x = 5;
+            } else {
+                x = 6;
+            }
+            if (x != 6){
+                InsVLast(&(playerNo(i).skill), x);
+                playerNo(i).skillCount ++;
+            }
+            printf("%s mendapatkan %s\n", 
+                playerNo(i).name, SkillNames[x-1]
+            );
+        }
+    }
+};

@@ -10,7 +10,7 @@
 // mengembalikan random number dari 0 sampai maxDigit (inclusive)
 int random(int maxDigit){
     return rand() % maxDigit;
-}
+};
 
 // menuliskan error ke output, lalu force exit
 void logErrorThenExit (const char* error, const char* location) {

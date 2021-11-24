@@ -5,6 +5,8 @@ int random(int maxDigit);
 
 void logErrorThenExit (const char* error, const char* location);
 
-void initGame ();
+void initGame();
+
+void gameLoop();
 
 #endif // !__FUNCTIONS_H__ 
