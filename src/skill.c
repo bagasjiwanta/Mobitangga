@@ -124,3 +124,22 @@ int CommandSkills (Pemain P){
 
     return idSkill;
 }
+
+void CerminPengganda(Pemain *P){
+    
+    List X;
+    int i;
+
+    X =(*P).skill;
+
+    if (NbElmt(X) < 9){
+        DelP(&X, 2);
+
+        for (i=1; i=2; i++){
+            insSkill(P);
+        }
+    }
+    else{
+        printf("Cermin Pengganda telah dipakai, tetapi tidak menghasilkan skill apapun.\n");
+    }
+}

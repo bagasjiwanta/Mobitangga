@@ -37,7 +37,11 @@ void PrintSkills (Pemain P);
 /* Mengeluarkan list skill yang dimiliki player */
 
 
-int CommandSkills (Player P);
+int CommandSkills (Pemain P);
 /* Mengeluarkan perintah meminta masukkan skill yang ingin dipakai */
+
+void CerminPengganda(Pemain P);
+/* I.S. Player memiliki cermin Pengganda  */
+/* F.S. Cermin Pengganda tidak ada lagi, digantikan dengan dua skill lainnya */
 
 #endif
