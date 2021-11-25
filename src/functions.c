@@ -149,7 +149,7 @@ void commandSkill(int playerIndex){
     scanf("%d", &j);
     while(j < -7 && j > 7){
         printf("Masukkan skill kembali: ");
-        scanf("%d", j);
+        scanf("%d", &j);
     }
     if(j == 0){
         printf("Berhasil keluar hehe\n");
