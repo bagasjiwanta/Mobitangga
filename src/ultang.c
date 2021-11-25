@@ -77,6 +77,14 @@ boolean F_IsPemainEmpty(T_Pemain V_Pemain)
     return (strcmp(V_Pemain.nama, "")==0);
 }
 
+int jumlahpemain(player p)
+{
+    if (F_IsPemainEmpty) {
+	  printf("0");
+    }
+    else {
+	  return jmlpemain;
+}
 
 void ChangeTurn(Queue *Q)
 {
