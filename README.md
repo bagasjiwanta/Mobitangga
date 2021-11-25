@@ -34,7 +34,7 @@
 
 ### Build
 
-#### sudo gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/array/array.c ./src/adt/player/player.c -o main
+#### sudo gcc-5 ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/array/array.c ./src/adt/player/player.c ./src/adt/list/listlinier.c -o main
 
 #### sudo chmod u+x ./main
 

@@ -3,7 +3,7 @@
 
 extern const char* Commands[];
 
-int random(int maxDigit);
+int randInt(int maxDigit);
 
 void logErrorThenExit (const char* error, const char* location);
 

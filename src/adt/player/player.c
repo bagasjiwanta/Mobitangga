@@ -41,7 +41,7 @@ void giveAllPlayersRandomSkill(){
     address p;
     for(i=1;i<=NumOfPlayers;i++){
         if(!(playerNo(i).skillCount >= 10)){
-            x = random(20) + 1;
+            x = randInt(20) + 1;
             if(x < 4){
                 x = 1;
             } else if (x < 6) {

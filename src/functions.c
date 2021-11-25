@@ -18,7 +18,7 @@ const char* Commands[] = {
 };
 
 // mengembalikan random number dari 0 sampai maxDigit (inclusive)
-int random(int maxDigit){
+int randInt(int maxDigit){
     return rand() % maxDigit;
 };
 
@@ -84,11 +84,11 @@ void initGame () {
             for (i = 1; i <= jumlahPemain; i++){
                 printf("Masukkan nama pemain ke-%d (maksimal 20 karakter): ", i);
                 getchar();
-                scanf("%[^\n]", &baseloc);
+                scanf("%[^\n]", baseloc);
                 while(strlen(baseloc) > 20){
                     printf("Masukkan kembali nama pemain ke-%d (maksimal 20 karakter): ", i);
                     getchar();
-                    scanf("%[^\n]", &baseloc);
+                    scanf("%[^\n]", baseloc);
                 }
                 CreatePlayer(baseloc, i);
             }
@@ -186,7 +186,7 @@ void commandInspect(){
 };
 
 void commandRoll(int playerIndex){
-    int diceResult = random(MAP->defaultMaxRoll) + 1;
+    int diceResult = randInt(MAP->defaultMaxRoll) + 1;
     boolean canForward = false;
     boolean canBackward = false;
     if (playerNo(playerIndex).buffs[2]) {
@@ -215,7 +215,7 @@ void gameLoop(){
         while(!isTurnEnd){ // commands
             do {
                 printf("Masukkan command: ");
-                scanf("%8s", &inputCommand);
+                scanf("%8s", inputCommand);
                 if (!strcmp(inputCommand, Commands[0])) {
                     commandSkill(playerIndex);
                 } else if (!strcmp(inputCommand, Commands[1])) {
