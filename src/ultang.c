@@ -84,6 +84,7 @@ int jumlahpemain(player p)
     }
     else {
 	  return jmlpemain;
+    }
 }
 
 void ChangeTurn(Queue *Q)
