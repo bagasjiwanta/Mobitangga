@@ -3,6 +3,7 @@
 #include "./adt/queue/queue.h"
 #include "./adt/mesinkata/mesinkata.h"
 #include "./adt/list/listlinier.h"
+#include "./adt/map/map.h"
 #include "functions.h"
 
 
