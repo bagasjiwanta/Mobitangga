@@ -7,7 +7,7 @@
 #include <time.h>
 #include <string.h>
 
-#define playerNo(x) PLAYERS.players[x-1]
+#define pNo(x) PLAYERS.players[x-1]
 #define NumOfPlayers PLAYERS.NEff
 
 typedef struct {

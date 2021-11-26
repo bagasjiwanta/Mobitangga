@@ -34,4 +34,9 @@ void displayMapForDebugging();
 // membaca file konfigurasi
 void readMap (const char* fileloc);
 
+// mengecek apakah petak valid
+boolean isPetakValid(int at);
+
+int checkTeleporter(int at);
+
 #endif // !__MAP_H__

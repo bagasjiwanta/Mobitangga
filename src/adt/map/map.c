@@ -100,3 +100,17 @@ void readMap (const char* fileloc) {
         MAP->teleporters.TI[src] = dest;
     }
 };
+
+boolean isPetakValid(int at){
+    boolean returnValue = false;
+    if( (at <= MAP->mapConfig.Neff) &&
+        (at >= 1) 
+    ){
+        returnValue = (MAP->mapConfig.TI[at] == '.');
+    }
+    return returnValue;
+}
+
+int checkTeleporter(int at){
+    return MAP->teleporters.TI[at]; 
+}
