@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./adt/queue/queue.h"
-#include "./adt/mesinkata/mesinkata.h"
+#include "./adt/array/array.h"
 #include "./adt/list/listlinier.h"
 #include "./adt/map/map.h"
 #include "functions.h"
@@ -14,22 +14,23 @@ typedef struct
     int Urutan;
     boolean Kalah;
     List skill;
-}Pemain;
+}T_Pemain;
 
 typedef struct
 {
-    pemain pem[5];
+    T_Pemain T[5];
     int jmlpemain;
-}player;
+}T_TabPemain;
 
-void turn(player p, int *dadu, boolean *issudahkocok, int i)
+
+void turn(T_TabPemain p, int *dadu, boolean *issudahkocok, int i)
 {   
     int giliran, tdadu; 
     char pilihan,majumundur;
 
     printf("-----Turn %d-----\n", i);
     giliran=((i-1)%p.jmlpemain)+1;
-    printf("Giliran : %s\n", p.pem[giliran].nama);
+    printf("Giliran : %s\n", p.T[giliran].nama);
     printf("Masukkan command: ");
     if(!(*issudahkocok)) 
     {   
@@ -38,35 +39,35 @@ void turn(player p, int *dadu, boolean *issudahkocok, int i)
     }
     tdadu=*dadu;
     printf("\nDadu  : %d\n", *dadu);
-    printf("%s mendapatkan angka %d. \n", p.pem[giliran].nama, tdadu);
-    if(MAP->mapConfig.TI[x+tdadu] == '#' and MAP->mapConfig.TI[x-tdadu] == '#')
+    printf("%s mendapatkan angka %d. \n", p.T[giliran].nama, tdadu);
+    if(MAP->mapConfig.TI[i+tdadu] == '#')and (MAP->mapConfig.TI[i-tdadu] == '#')
 	{
-    	printf("%s tidak dapat bergerak. \n",p.pem[giliran].nama);
+    	printf("%s tidak dapat bergerak. \n",p.T[giliran].nama);
 	}
-	else if (MAP->mapConfig.TI[x+tdadu] == '.'and MAP->mapConfig.TI[x-tdadu] == '#') 
+	else if (MAP->mapConfig.TI[i+tdadu] == '.')and (MAP->mapConfig.TI[i-tdadu] == '#')
 	{
-		printf("%s dapat maju. \n",p.pem[giliran].nama);
-		printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
-		printf("%s berada di petak %d. \n",p.pem[giliran].nama, MAP->mapConfig.TI[x+tdadu]);
+		printf("%s dapat maju. \n",p.T[giliran].nama);
+		printf("%s maju %d langkah. \n",p.T[giliran].nama, tdadu);
+		printf("%s berada di petak %d. \n",p.T[giliran].nama, MAP->mapConfig.TI[i+tdadu]);
 	}
-	else if (MAP->mapConfig.TI[x-tdadu] == '.'and MAP->mapConfig.TI[x+tdadu] == '#') 
+	else if (MAP->mapConfig.TI[i-tdadu]== '.') and (MAP->mapConfig.TI[i+tdadu] == '#') 
 	{
-		printf("%s dapat mundur. \n",p.pem[giliran].nama);
-		printf("%s mundur %d langkah. \n",p.pem[giliran].nama, tdadu);
-		printf("%s berada di petak %d. \n",p.pem[giliran].nama, MAP->mapConfig.TI[x-tdadu]);
+		printf("%s dapat mundur. \n",p.T[giliran].nama);
+		printf("%s mundur %d langkah. \n",p.T[giliran].nama, tdadu);
+		printf("%s berada di petak %d. \n",p.T[giliran].nama, MAP->mapConfig.TI[i-tdadu]);
 	}
 	else
 	{
-		printf("%s dapat maju dan mundur. \n",p.pem[giliran].nama);
+		printf("%s dapat maju dan mundur. \n",p.T[giliran].nama);
 		printf("Pilih maju/mundur \n");
 		scanf(" %c", &majumundur);
 		if(majumundur == "maju"){
-			printf("%s maju %d langkah. \n",p.pem[giliran].nama, tdadu);
-			printf("%s berada di petak %d. \n",p.pem[giliran].nama, MAP->mapConfig.TI[x+tdadu]);
+			printf("%s maju %d langkah. \n",p.T[giliran].nama, tdadu);
+			printf("%s berada di petak %d. \n",p.T[giliran].nama, MAP->mapConfig.TI[i+tdadu]);
 		}
 		else if(majumundur == "mundur"){
-			printf("%s mundur %d langkah. \n",p.pem[giliran].nama, tdadu);
-			printf("%s berada di petak %d. \n",p.pem[giliran].nama, MAP->mapConfig.TI[x-tdadu]);
+			printf("%s mundur %d langkah. \n",p.T[giliran].nama, tdadu);
+			printf("%s berada di petak %d. \n",p.T[giliran].nama, MAP->mapConfig.TI[i-tdadu]);
 		}
 		
 	}	
@@ -76,13 +77,14 @@ boolean F_IsPemainEmpty(T_Pemain V_Pemain)
     return (strcmp(V_Pemain.nama, "")==0);
 }
 
-int jumlahpemain(player p)
-{
+int jumlahpemain(T_TabPemain p)
+{ 
+	int i;
     if (F_IsPemainEmpty) {
 	  printf("0");
     }
     else {
-	  return jmlpemain;
+	  return p.jmlpemain;
     }
 }
 
@@ -93,22 +95,23 @@ void ChangeTurn(Queue *Q)
 	Del(&(*Q), &X);
 	Add(&(*Q), X);
 }
-void statuspemain(player play) 
+void statusTain(T_TabPemain play) 
 {
     int i;
     printf("****** STATUS PEMAIN ******\n");
     for(i=1;i<=4;i++)
     {
-        if(strcmp("",play.pem[i].nama)!=0)
+        if(strcmp("",play.T[i].nama)!=0)
         {
-            printf("-----%s-----\n", play.pem[i].nama);
-            printf("Letak pemain di petak : %d\n", play.pem[i].letak);
+            printf("-----%s-----\n", play.T[i].nama);
+            printf("Letak pemain di petak : %d\n", play.T[i].letak);
         }
     }
 }
-void pemenang (player pl)
+void pemenang (T_TabPemain play)
 {
-	if(pl == MAP->mapConfig.neff)//ujung map
+	int i;
+	if(play.T[i].letak == MAP->mapConfig.TI)//ujung map
 	{
 		printf("==========SELAMAT ANDA MENJADI PEMENANG DARI GAME INI!!!==========");
 	}
