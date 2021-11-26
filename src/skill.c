@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../list/listlinier.h"
-#include "../skill/skill.h"
-#include "../src/ultang.c"
+#include "./adt/list/listlinier.h"
+#include "skill.h"
+#include "ultang.c"
 
 int RandomNumber (int start, int end, int amount){
 

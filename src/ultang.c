@@ -5,6 +5,7 @@
 #include "./adt/list/listlinier.h"
 #include "./adt/map/map.h"
 #include "functions.h"
+#include <string.h>
 
 
 typedef struct
@@ -40,17 +41,17 @@ void turn(T_TabPemain p, int *dadu, boolean *issudahkocok, int i)
     tdadu=*dadu;
     printf("\nDadu  : %d\n", *dadu);
     printf("%s mendapatkan angka %d. \n", p.T[giliran].nama, tdadu);
-    if(MAP->mapConfig.TI[i+tdadu] == '#')and (MAP->mapConfig.TI[i-tdadu] == '#')
+    if(MAP->mapConfig.TI[i+tdadu] == '#') && (MAP->mapConfig.TI[i-tdadu] == '#')
 	{
     	printf("%s tidak dapat bergerak. \n",p.T[giliran].nama);
 	}
-	else if (MAP->mapConfig.TI[i+tdadu] == '.')and (MAP->mapConfig.TI[i-tdadu] == '#')
+	else if (MAP->mapConfig.TI[i+tdadu] == '.') && (MAP->mapConfig.TI[i-tdadu] == '#')
 	{
 		printf("%s dapat maju. \n",p.T[giliran].nama);
 		printf("%s maju %d langkah. \n",p.T[giliran].nama, tdadu);
 		printf("%s berada di petak %d. \n",p.T[giliran].nama, MAP->mapConfig.TI[i+tdadu]);
 	}
-	else if (MAP->mapConfig.TI[i-tdadu]== '.') and (MAP->mapConfig.TI[i+tdadu] == '#') 
+	else if (MAP->mapConfig.TI[i-tdadu]== '.') && (MAP->mapConfig.TI[i+tdadu] == '#') 
 	{
 		printf("%s dapat mundur. \n",p.T[giliran].nama);
 		printf("%s mundur %d langkah. \n",p.T[giliran].nama, tdadu);
@@ -90,11 +91,11 @@ int jumlahpemain(T_TabPemain p)
 
 void ChangeTurn(Queue *Q)
 {
-	
 	infotype X;
 	Del(&(*Q), &X);
 	Add(&(*Q), X);
 }
+
 void statuspemain(T_TabPemain play) 
 {
     int i;
@@ -111,7 +112,7 @@ void statuspemain(T_TabPemain play)
 void pemenang (T_TabPemain play)
 {
 	int i;
-	if(play.T[i].letak == MAP->mapConfig.TI)//ujung map
+	if(play.T[i].letak == MAP->mapConfig.Neff)//ujung map
 	{
 		printf("==========SELAMAT ANDA MENJADI PEMENANG DARI GAME INI!!!==========");
 	}
