@@ -95,7 +95,7 @@ void ChangeTurn(Queue *Q)
 	Del(&(*Q), &X);
 	Add(&(*Q), X);
 }
-void statuspemainain(T_TabPemain play) 
+void statuspemain(T_TabPemain play) 
 {
     int i;
     printf("****** STATUS PEMAIN ******\n");
