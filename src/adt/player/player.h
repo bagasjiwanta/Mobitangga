@@ -25,11 +25,12 @@ typedef struct {
 
 extern Players PLAYERS;
 extern const char* SkillNames[];
+extern const char* BuffNames[];
 
 void initPlayers(int numberOfPlayers);
 
 void CreatePlayer(char* name, int playerIndex);
 
-void giveAllPlayersRandomSkill();
+int givePlayerRandomSkill(int pIndex);
 
 #endif // !__PLAYER_H__
