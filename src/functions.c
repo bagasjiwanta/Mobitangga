@@ -324,7 +324,7 @@ void movePlayer(int pIndex, int toWhere) {
         if(pNo(pIndex).buffs[0]){
             printf("%s memiliki imunitas teleporter.\n", pNo(pIndex).name);
             printf("Apakah %s ingin teleport (Y/N)? ", pNo(pIndex).name);
-            scanf("%1s", &teleportChoice);
+            scanf("%1s", teleportChoice);
             if( strcmp(teleportChoice, "Y") != 0 
                 &&
                 strcmp(teleportChoice, "N") != 0){strcpy(teleportChoice, "Y");}

@@ -58,7 +58,7 @@ int givePlayerRandomSkill(int pIndex){
         } else if (x < 13) {
             x = 5;
         } else {
-            x = 3;
+            x = 6;
         }
         if (x != 6){
             InsVLast(&(pNo(pIndex).skill), x);
