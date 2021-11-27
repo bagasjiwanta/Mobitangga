@@ -29,6 +29,7 @@ void SetupGame(int numberOfPlayers){
     GAME->isTurnEnd = false;
     GAME->isCerminUsed = false;
     GAME->givenSkill = 0;
+    GAME->isUndoUsed = false;
     GAME->numOfPlayers = numberOfPlayers;
     GAME->playerNames = (char**) malloc (sizeof(char*) * numberOfPlayers);
     for(int i=0;i<numberOfPlayers;i++){
@@ -41,9 +42,10 @@ void SetupGame(int numberOfPlayers){
     // printPosisiTiapPemain(1);
 }
 
-void printPosisiTiapPemain(int round){
-    for(int i=0;i<GAME->numOfPlayers;i++){
-        printf("%s : %d\n", Name(i+1), Round(round).player[i].position);
+// buat debugging
+void printPosisiTiapPemain(){
+    for(int i=1;i<=GAME->numOfPlayers;i++){
+        printf("%s : %d\n", Name(i), PlayerNow(i).position);
     }
 }
 
@@ -56,6 +58,11 @@ infotypeStack FirstRound(){
             s.player[i].buffs[j] = 0;
         }
     }
+    return s;
+}
+
+infotypeStack NewRound(){
+    infotypeStack s = InfoTop(*(GAME->GameStack));
     return s;
 }
 
@@ -139,7 +146,7 @@ void initGame () {
                 // printf("Telah dibuat pemain bernama %s\n", (GAME->playerNames[i-1]));
                 CreatePlayer(baseloc, i);
             }
-            printPosisiTiapPemain(1);
+            // printPosisiTiapPemain(1);
 
             endOperation = true;
         } else if (choice == 'e') {
@@ -298,16 +305,17 @@ void commandInspect(){
 
 void commandRoll(int pIndex){
     int diceResult = randInt(MAP->defaultMaxRoll) + 1;
-    int currentPost = pNo(pIndex).position;
+    // int currentPost = pNo(pIndex).position;
+    int currentPost = PlayerNow(pIndex).position;
     boolean canForward = false;
     boolean canBackward = false;
 
-    printf("Before: %d\n", diceResult);
+    // printf("Before: %d\n", diceResult);
     if (pNo(pIndex).buffs[2]) { // senter pembesar hoki
-        printf("Yey pembesar hokinya dinotice\n");
+        // printf("Yey pembesar hokinya dinotice\n");
         diceResult = (diceResult % (MAP->defaultMaxRoll / 2)) + (MAP->defaultMaxRoll / 2);
     } else if (pNo(pIndex).buffs[3]) { // senter pengecil hoki
-        printf("Yey pengecil hokinya dinotice\n");
+        // printf("Yey pengecil hokinya dinotice\n");
         diceResult = diceResult % ((MAP->defaultMaxRoll / 2) + 1);
     }
     printf("%s mendapatkan dadu: %d\n", NameNow, diceResult);
@@ -356,7 +364,7 @@ void movePlayer(int pIndex, int toWhere) {
     if(toWhere == 0){
         return;
     }
-    pNo(pIndex).position = toWhere;
+    PlayerNow(pIndex).position = toWhere;
     printf("%s berada di petak %d.\n", Name(pIndex), toWhere);
     teleporterExit = checkTeleporter(toWhere);
     
@@ -375,11 +383,11 @@ void movePlayer(int pIndex, int toWhere) {
                 pNo(pIndex).buffs[0] = false;
                 printf("Buff imunitas teleport hilang.\n");
             } else {
-                pNo(pIndex).position = teleporterExit;
+                PlayerNow(pIndex).position = teleporterExit;
                 printf("%s teleport ke petak %d,\n", Name(pIndex), teleporterExit);
             }
         } else {
-            pNo(pIndex).position = teleporterExit;
+            PlayerNow(pIndex).position = teleporterExit;
             printf("%s teleport ke petak %d,\n", Name(pIndex), teleporterExit);
         }   
     }
@@ -435,9 +443,14 @@ void checkForWinner(){
 
 void gameLoop(){
     initGame();
+    infotypeStack tempRound;
 
     while(1){ // game
         // printf("Ronde %d\n", ronde);
+        if(!GAME->isUndoUsed){
+            Push(GAME->GameStack, NewRound());
+        }
+        GAME->isUndoUsed = false;
         while(GAME->whoseTurn <= PLAYERS.NEff){ // ronde
 
             printf("Giliran kamu %s\n", NameNow);
@@ -450,7 +463,9 @@ void gameLoop(){
             } else {
                 printf("Kamu mendapat skill %s.\n", SkillNames[GAME->givenSkill - 1]);
             }
+
             while(!(GAME->isTurnEnd)){
+                printf("Top: %d\n", TopGame);
                 printf("\nMasukkan command: ");
                 scanf("%10s", GAME->inputCommand);
                 if (!strcmp(GAME->inputCommand, Commands[0])) { // command = SKILL
@@ -472,16 +487,31 @@ void gameLoop(){
                     checkForWinner();
                 } else if (!strcmp(GAME->inputCommand, Commands[5])) { // command = ENDTURN
                     GAME->isTurnEnd = GAME->isRolled;
-                } 
+                } else if (!strcmp(GAME->inputCommand, Commands[6])) {
+                    if(TopGame == 1) {
+                        printf("Tidak bisa undo lagi, sudah berada di awal game.\n");
+                    } else {
+                        GAME->isUndoUsed = true;
+                        Pop(GAME->GameStack, &tempRound);
+                        if(TopGame == 1){
+                            Push(GAME->GameStack, NewRound());
+                        }
+                    }
+                    GAME->whoseTurn = 100;
+                    GAME->isTurnEnd = true;
+                }
             }
+
             GAME->whoseTurn ++;
             GAME->isTurnEnd = false;
             GAME->isRolled = false;
             GAME->isSenterUsed = false;
             GAME->isCerminUsed = false;
+
         }
+        printPosisiTiapPemain();
         GAME->whoseTurn = 1;
-        GAME->ronde++;
+        // GAME->ronde++;
         resetBuff();
     }
 }

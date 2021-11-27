@@ -7,6 +7,8 @@
 #define Name(x) GAME->playerNames[x-1]
 #define NameNow GAME->playerNames[GAME->whoseTurn - 1]
 #define Round(x) GAME->GameStack->round[x]
+#define PlayerNow(x) GAME->GameStack->round[GAME->GameStack->TOP].player[x-1]
+#define TopGame GAME->GameStack->TOP
 
 typedef struct {
     int whoseTurn;
@@ -16,6 +18,7 @@ typedef struct {
     boolean isCerminUsed;
     boolean isSenterUsed;
     boolean isRolled;
+    boolean isUndoUsed;
     char inputCommand[15];
     int givenSkill;
     char** playerNames;
@@ -29,9 +32,11 @@ int randInt(int maxDigit);
 
 void logErrorThenExit (const char* error, const char* location);
 
-void printPosisiTiapPemain(int round);
+void printPosisiTiapPemain();
 
 infotypeStack FirstRound();
+
+infotypeStack NewRound();
 
 void initGame();
 
