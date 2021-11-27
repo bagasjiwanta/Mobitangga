@@ -54,6 +54,7 @@ infotypeStack FirstRound(){
     infotypeStack s;
     for(int i=0;i<GAME->numOfPlayers;i++){
         s.player[i].position = 1;
+        s.player[i].skillCount = 1;
         CreateEmpty(&(s.player[i].skills));
         for(int j=0;j<4;j++){
             s.player[i].buffs[j] = 0;
@@ -162,7 +163,7 @@ void resetBuff () {
     int i, j;
     for(i = 1;i <= PLAYERS.NEff; i++){
         for (j = 1; j < 4; j++) {
-            pNo(i).buffs[j] = false;
+            PlayerNow(i).buffs[j] = false;
         }
     }
 }
@@ -172,7 +173,7 @@ void commandMap(){
     strcpy(temp, MAP->mapConfig.TI);
     int i, x;
     for(i=1;i<=PLAYERS.NEff;i++){
-        x = pNo(i).position;
+        x = PlayerNow(i).position;
         temp[x] = '*';
         printf("%s\t\t: %s\n", Name(i), temp+1);
         temp[x] = MAP->mapConfig.TI[x];
@@ -185,12 +186,13 @@ void useSkill(int pIndex, int skillIndex){
     int tempArr[4] = {0, 0, 0, 0};
     switch(skillIndex){
         case 1:
-            pNo(pIndex).buffs[0] = true;
+            // pNo(pIndex).buffs[0] = true;
+            PlayerNow(pIndex).buffs[0] = true;
             printf("Buff imunitas teleport dinyalakan.\n");
             break;
         case 2:
             if(GAME->isCerminUsed){ return; }
-            if(pNo(pIndex).skillCount > 9){ return; }
+            if(PlayerNow(pIndex).skillCount > 9){ return; }
             firstSkill = givePlayerRandomSkill(pIndex);
             secondSkill = givePlayerRandomSkill(pIndex);
             printf("%s mendapatkan 2 skill baru:\n1. %s\n2. %s\n",
@@ -200,23 +202,23 @@ void useSkill(int pIndex, int skillIndex){
             break;
         case 3:
             if(GAME->isSenterUsed){ return; }
-            pNo(pIndex).buffs[2] = true;
+            PlayerNow(pIndex).buffs[2] = true;
             printf("Buff senter pembesar hoki milik %s dinyalakan.\n", Name(pIndex));
             GAME->isSenterUsed = true;
             break;
         case 4:
             if(GAME->isSenterUsed){ return; }
-            pNo(pIndex).buffs[3] = true;
+            PlayerNow(pIndex).buffs[3] = true;
             printf("Buff senter pengecil hoki milik %s dinyalakan.\n", Name(pIndex));
             GAME->isSenterUsed = true;
             break;
         case 5:
             j = 1;
-            printf("Saat ini kamu berada di petak ke-%d.\n", pNo(pIndex).position);
+            printf("Saat ini kamu berada di petak ke-%d.\n", PlayerNow(pIndex).position);
             printf("Posisi pemain lain saat ini:\n");
             for(i=1;i<=PLAYERS.NEff;i++){
                 if(i != pIndex){
-                    printf("%d. %s %d.\n", j, Name(i), pNo(i).position);
+                    printf("%d. %s %d.\n", j, Name(i), PlayerNow(pIndex).position);
                     tempArr[j-1] = i;
                     j++;
                 }
@@ -225,9 +227,9 @@ void useSkill(int pIndex, int skillIndex){
             scanf("%d", &j);
             if(j > PLAYERS.NEff - 1){ printf("Tidak valid.\n"); return; }
             j = tempArr[j-1];
-            tempPosition = pNo(pIndex).position;
-            pNo(pIndex).position = pNo(j).position;
-            pNo(j).position = tempPosition;
+            tempPosition = PlayerNow(pIndex).position;
+            PlayerNow(pIndex).position = PlayerNow(j).position;
+            PlayerNow(j).position = tempPosition;
             printf("%s berhasil menukar posisinya dengan %s", Name(pIndex), Name(j));
             break;
         default:
@@ -287,7 +289,7 @@ void commandBuff(int pIndex){
     printf("Buff milik %s:\n", Name(pIndex));
     for(int i=0;i<4;i++){
         printf("%d. %s: ", i+1, BuffNames[i]);
-        if(pNo(pIndex).buffs[i]) { printf("nyala.\n"); } else { printf("mati.\n"); }
+        if(PlayerNow(pIndex).buffs[i]) { printf("nyala.\n"); } else { printf("mati.\n"); }
     }
 }
 
@@ -312,10 +314,10 @@ void commandRoll(int pIndex){
     boolean canBackward = false;
 
     // printf("Before: %d\n", diceResult);
-    if (pNo(pIndex).buffs[2]) { // senter pembesar hoki
+    if (PlayerNow(pIndex).buffs[2]) { // senter pembesar hoki
         // printf("Yey pembesar hokinya dinotice\n");
         diceResult = (diceResult % (MAP->defaultMaxRoll / 2)) + (MAP->defaultMaxRoll / 2);
-    } else if (pNo(pIndex).buffs[3]) { // senter pengecil hoki
+    } else if (PlayerNow(pIndex).buffs[3]) { // senter pengecil hoki
         // printf("Yey pengecil hokinya dinotice\n");
         diceResult = diceResult % ((MAP->defaultMaxRoll / 2) + 1);
     }
@@ -371,7 +373,7 @@ void movePlayer(int pIndex, int toWhere) {
     
     if(teleporterExit != 0){
         printf("%s menemukan teleporter.\n", Name(pIndex));
-        if(pNo(pIndex).buffs[0]){
+        if(PlayerNow(pIndex).buffs[0]){
             printf("%s memiliki imunitas teleporter.\n", Name(pIndex));
             printf("Apakah %s ingin teleport (Y/N)? ", Name(pIndex));
             scanf("%1s", teleportChoice);
@@ -381,7 +383,7 @@ void movePlayer(int pIndex, int toWhere) {
 
             if(strcmp(teleportChoice, "N") == 0){
                 printf("%s tidak teleport.\n", Name(pIndex));
-                pNo(pIndex).buffs[0] = false;
+                PlayerNow(pIndex).buffs[0] = false;
                 printf("Buff imunitas teleport hilang.\n");
             } else {
                 PlayerNow(pIndex).position = teleporterExit;
@@ -405,7 +407,7 @@ void endGame(){
     int ranks[4] = {1, 2, 3, 4};
     printf("Selamat kepada %s karena telah memenangkan game ini.\n", NameNow);
     for(int i=1;i<=PLAYERS.NEff;i++){
-        positions[i-1] = pNo(i).position;
+        positions[i-1] = PlayerNow(i).position;
     }
     for(int k=0;k<3;k++){
         for(int j=0;j<PLAYERS.NEff-1;j++){
@@ -437,7 +439,7 @@ void endGame(){
 };
 
 void checkForWinner(){
-    if(pNo(GAME->whoseTurn).position == MAP->mapConfig.Neff){
+    if(PlayerNow(GAME->whoseTurn).position == MAP->mapConfig.Neff){
         endGame();
     }
 }

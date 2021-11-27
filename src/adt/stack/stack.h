@@ -12,6 +12,7 @@ typedef struct {
   int position;
   int buffs[4];
   List skills;
+  int skillCount;
 } playerState;
 
 typedef struct {
