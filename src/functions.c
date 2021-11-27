@@ -30,6 +30,7 @@ void SetupGame(int numberOfPlayers){
     GAME->isCerminUsed = false;
     GAME->givenSkill = 0;
     GAME->isUndoUsed = false;
+    GAME->undoTries = 0;
     GAME->numOfPlayers = numberOfPlayers;
     GAME->playerNames = (char**) malloc (sizeof(char*) * numberOfPlayers);
     for(int i=0;i<numberOfPlayers;i++){
@@ -441,18 +442,32 @@ void checkForWinner(){
     }
 }
 
+void commandUndo(){
+    infotypeStack tempRound;
+    if(TopGame == 1) {
+        printf("Tidak bisa undo lagi, sudah berada di awal game.\n");
+    } else {
+        GAME->undoTries ++;
+        GAME->isUndoUsed = true;
+        Pop(GAME->GameStack, &tempRound);
+        if((TopGame == 1) || (GAME->undoTries == 1)){
+            Push(GAME->GameStack, NewRound());
+        }
+    }
+    GAME->whoseTurn = 100;
+    GAME->isTurnEnd = true;
+}
+
 void gameLoop(){
     initGame();
-    infotypeStack tempRound;
 
     while(1){ // game
-        // printf("Ronde %d\n", ronde);
         if(!GAME->isUndoUsed){
             Push(GAME->GameStack, NewRound());
         }
         GAME->isUndoUsed = false;
+        printf("Ronde %d\n", TopGame - 1);
         while(GAME->whoseTurn <= PLAYERS.NEff){ // ronde
-
             printf("Giliran kamu %s\n", NameNow);
             GAME->givenSkill = givePlayerRandomSkill(GAME->whoseTurn);
 
@@ -487,22 +502,14 @@ void gameLoop(){
                     checkForWinner();
                 } else if (!strcmp(GAME->inputCommand, Commands[5])) { // command = ENDTURN
                     GAME->isTurnEnd = GAME->isRolled;
+                    GAME->undoTries = 0;
                 } else if (!strcmp(GAME->inputCommand, Commands[6])) {
-                    if(TopGame == 1) {
-                        printf("Tidak bisa undo lagi, sudah berada di awal game.\n");
-                    } else {
-                        GAME->isUndoUsed = true;
-                        Pop(GAME->GameStack, &tempRound);
-                        if(TopGame == 1){
-                            Push(GAME->GameStack, NewRound());
-                        }
-                    }
-                    GAME->whoseTurn = 100;
-                    GAME->isTurnEnd = true;
+                    commandUndo();
                 }
             }
 
             GAME->whoseTurn ++;
+            
             GAME->isTurnEnd = false;
             GAME->isRolled = false;
             GAME->isSenterUsed = false;

@@ -19,6 +19,7 @@ typedef struct {
     boolean isSenterUsed;
     boolean isRolled;
     boolean isUndoUsed;
+    int undoTries;
     char inputCommand[15];
     int givenSkill;
     char** playerNames;
@@ -49,6 +50,8 @@ void commandSkill(int playerIndex);
 void commandMap();
 
 void commandRoll();
+
+void commandUndo();
 
 void useSkill(int playerIndex, int skillIndex);
 
