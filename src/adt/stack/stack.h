@@ -15,7 +15,7 @@ typedef struct {
 } playerState;
 
 typedef struct {
-  playerState* player;
+  playerState player[4];
 } infotypeStack;
 
 typedef int addressStack;   /* indeks tabel */

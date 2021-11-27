@@ -29,12 +29,34 @@ void SetupGame(int numberOfPlayers){
     GAME->isTurnEnd = false;
     GAME->isCerminUsed = false;
     GAME->givenSkill = 0;
+    GAME->numOfPlayers = numberOfPlayers;
     GAME->playerNames = (char**) malloc (sizeof(char*) * numberOfPlayers);
     for(int i=0;i<numberOfPlayers;i++){
         GAME->playerNames[i] = (char*) malloc (sizeof(char) * 21);
     }
     GAME->GameStack = (Stack*) malloc (sizeof(Stack));
+    GAME->GameStack->TOP = 0;
     GAME->GameStack->round = (infotypeStack*) malloc (sizeof(infotypeStack) * 10);
+    Push(GAME->GameStack, FirstRound());
+    // printPosisiTiapPemain(1);
+}
+
+void printPosisiTiapPemain(int round){
+    for(int i=0;i<GAME->numOfPlayers;i++){
+        printf("%s : %d\n", Name(i+1), Round(round).player[i].position);
+    }
+}
+
+infotypeStack FirstRound(){
+    infotypeStack s;
+    for(int i=0;i<GAME->numOfPlayers;i++){
+        s.player[i].position = 1;
+        CreateEmpty(&(s.player[i].skills));
+        for(int j=0;j<4;j++){
+            s.player[i].buffs[j] = 0;
+        }
+    }
+    return s;
 }
 
 // mengembalikan random number dari 0 sampai maxDigit (inclusive)
@@ -117,6 +139,8 @@ void initGame () {
                 // printf("Telah dibuat pemain bernama %s\n", (GAME->playerNames[i-1]));
                 CreatePlayer(baseloc, i);
             }
+            printPosisiTiapPemain(1);
+
             endOperation = true;
         } else if (choice == 'e') {
             // prosedur exit
