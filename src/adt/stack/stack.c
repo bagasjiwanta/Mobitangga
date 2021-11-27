@@ -1,20 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "stack.h"
 
-void CreateEmpty (Stack *S){
-  Top(*S) = Nil;
+void CreateEmptyStack (Stack *S){
+  Top(*S) = NilStack;
 };
 
-boolean IsEmpty (Stack S){
-  return Top(S) == Nil;
+boolean IsStackEmpty (Stack S){
+  return Top(S) == NilStack;
 };
 
-boolean IsFull (Stack S){
-  return Top(S) == MaxEl;
-};
-
-void Push (Stack * S, infotype X){
-  if (!IsEmpty(*S)) {
+void Push (Stack * S, infotypeStack X){
+  if (!IsStackEmpty(*S)) {
+    // if(Top(*S) == 10){
+    //   realloc();
+    // }
     Top(*S)++;
   } else {
     Top(*S) = 1;
@@ -22,7 +22,7 @@ void Push (Stack * S, infotype X){
   InfoTop(*S) = X;
 };
 
-void Pop (Stack * S, infotype* X){
+void Pop (Stack * S, infotypeStack* X){
   *X = InfoTop(*S);
   Top(*S)--;
 }

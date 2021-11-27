@@ -47,6 +47,7 @@ int givePlayerRandomSkill(int pIndex){
     int x = 0;
     if(!(pNo(pIndex).skillCount >= 10)){
         x = randInt(20) + 1;
+
         if(x < 4){
             x = 1;
         } else if (x < 6) {
@@ -60,6 +61,7 @@ int givePlayerRandomSkill(int pIndex){
         } else {
             x = 6;
         }
+        
         if (x != 6){
             InsVLast(&(pNo(pIndex).skill), x);
             pNo(pIndex).skillCount ++;

@@ -13,7 +13,7 @@
 typedef struct {
     char name[21];
     int position;
-    boolean buffs[4]; // {false, false, false, false}
+    boolean buffs[4];
     List skill;
     int skillCount;
 } Player;
