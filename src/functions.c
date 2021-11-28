@@ -515,7 +515,8 @@ void gameLoop(){
             Push(GAME->GameStack, NewRound());
         }
         GAME->isUndoUsed = false;
-        printf("\n-----Ronde %d-----\n\n", TopGame - 1);
+        printf("\n-----Ronde %d-----\n", TopGame - 1);
+        commandMap(); printf("\n");
         while(GAME->whoseTurn <= GAME->numOfPlayers){ // ronde
             printf("Giliran kamu %s\n", NameNow);
             GAME->givenSkill = givePlayerRandomSkill(GAME->whoseTurn);
