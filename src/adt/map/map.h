@@ -7,7 +7,6 @@
 // Map berisi mapConfig : konfigurasi peta;
 // teleporters : array of teleporter, dan
 // defaultMaxRoll : max roll yang default.
-// 
 typedef struct MapStruct {
     TabChar mapConfig;
     TabInt teleporters;
@@ -34,5 +33,10 @@ void displayMapForDebugging();
 
 // membaca file konfigurasi
 void readMap (const char* fileloc);
+
+// mengecek apakah petak valid
+boolean isPetakValid(int at);
+
+int checkTeleporter(int at);
 
 #endif // !__MAP_H__
