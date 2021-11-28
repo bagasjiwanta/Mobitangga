@@ -164,7 +164,7 @@ void DelAfter (List *L, address *Pdel, address Prec){
 
 void PrintInfo (List L){
     address P;
-    printf("\n\t[");
+    printf("[");
     if (!IsListEmpty(L)) {
         P = First(L);
         do {
@@ -175,7 +175,7 @@ void PrintInfo (List L){
         } 
         while (P != Nil);
     }
-    printf("]\n");
+    printf("]");
 }
 
 int NbElmtList (List L){
@@ -202,23 +202,6 @@ infotype Max (List L){
         P = Next(P);
     }
     return nmax;
-}
-
-void Konkat1 (List *L1, List *L2, List *L3){
-    CreateEmpty(L3);
-    if (IsListEmpty(*L1)==false) {
-        address P = First(*L1);
-        First(*L3) = P;
-        while (Next(P) != Nil) {
-            P = Next(P);
-        }
-        Next(P) = First(*L2);
-    } else {
-        First(*L3) = First(*L2);
-    }
-    CreateEmpty(L1);
-    CreateEmpty(L2);
-       
 }
 
 void copyList(List src, List* dest){
