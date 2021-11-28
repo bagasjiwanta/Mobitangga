@@ -20,6 +20,7 @@ void Push (Stack * S, infotypeStack X){
     Top(*S) = 1;
   }
   InfoTop(*S) = X;
+  // printf("c");
 };
 
 void Pop (Stack * S, infotypeStack* X){

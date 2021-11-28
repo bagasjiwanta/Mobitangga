@@ -164,7 +164,7 @@ void DelAfter (List *L, address *Pdel, address Prec){
 
 void PrintInfo (List L){
     address P;
-    printf("[");
+    printf("\n\t[");
     if (!IsListEmpty(L)) {
         P = First(L);
         do {
@@ -175,7 +175,7 @@ void PrintInfo (List L){
         } 
         while (P != Nil);
     }
-    printf("]");
+    printf("]\n");
 }
 
 int NbElmtList (List L){
@@ -219,4 +219,17 @@ void Konkat1 (List *L1, List *L2, List *L3){
     CreateEmpty(L1);
     CreateEmpty(L2);
        
+}
+
+void copyList(List src, List* dest){
+    int temp;
+    address p;
+    while (dest->First != Nil) {
+        DelVFirst(dest, &temp);
+    }
+    p = src.First;
+    while (p != Nil){
+        InsVFirst(dest, p->info);
+        p = p->next;
+    }
 }

@@ -11,7 +11,7 @@ Map* MAP;
 
 void initMap(){
     MAP = (Map*) malloc (sizeof(Map));
-}
+};
 
 void allocMap(int N){
     MAP->mapConfig.TI = (char*) malloc (sizeof(char) * N + 3);
@@ -22,11 +22,11 @@ void allocMap(int N){
     for(x=0;x<=N;x++){
         MAP->teleporters.TI[x] = 0;
     }
-}
+};
 
 void deallocMap(){
     free(MAP);
-}
+};
 
 void displayMapForDebugging(){
     printf("\n----Menampilkan map----\nPanjang peta: %d\n", MAP->mapConfig.Neff);
@@ -37,7 +37,7 @@ void displayMapForDebugging(){
     for(x=1;x<=(MAP->mapConfig.Neff);x++){
         printf("Petak masuk: %d, petak keluar: %d\n", x, MAP->teleporters.TI[x]);
     }
-}
+};
 
 void readMap (const char* fileloc) {
     // Deklarasi variabel
@@ -109,8 +109,8 @@ boolean isPetakValid(int at){
         returnValue = (MAP->mapConfig.TI[at] == '.');
     }
     return returnValue;
-}
+};
 
 int checkTeleporter(int at){
     return MAP->teleporters.TI[at]; 
-}
+};
