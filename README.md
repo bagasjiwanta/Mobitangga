@@ -28,13 +28,13 @@
 
 ## Command untuk run di windows
 
-#### gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/array/array.c ./src/adt/list/listlinier.c ./src/adt/stack/stack.c -o main
+#### gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/list/listlinier.c ./src/adt/stack/stack.c -o main
 
-## Command untuk run di linux (untuk gcc v5, ganti 'gcc' dengan 'gcc-5')
+## Command untuk run di linux (untuk gcc versi x, ganti 'gcc' dengan 'gcc-x')
 
 ### Build
 
-#### sudo gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/array/array.c ./src/adt/list/listlinier.c ./src/adt/stack/stack.c -o main
+#### sudo gcc-5 ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/list/listlinier.c ./src/adt/stack/stack.c -o main
 
 #### sudo chmod u+x ./main
 

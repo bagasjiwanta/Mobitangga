@@ -39,4 +39,6 @@ boolean isPetakValid(int at);
 
 int checkTeleporter(int at);
 
+void logErrorThenExit (const char* error, const char* location);
+
 #endif // !__MAP_H__
