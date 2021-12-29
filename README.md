@@ -43,3 +43,11 @@ After you input your desired player names, the game will began, here are the com
 Each command details are in this (bahasa indonesia) [specification](https://docs.google.com/document/d/1XWxnjQnzXTIRdKlBelEWgc1iY9Jr1rDI1yqxjHCr6B8/edit)
 
 ## Previews
+
+### preview 1
+
+<img src="./images/preview1.png">
+
+### preview 2
+
+<img src="./images/preview2.png">
