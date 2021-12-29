@@ -1,4 +1,4 @@
-# Doraemonangis
+# Mobitangga
 
 CLI (command line interface) based game written in c with features like : Map, teleports, skills, buffs, turn based with undo turn, load configuration from file.
 
@@ -20,3 +20,26 @@ gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functio
 ```
 
 4. Open main.exe
+
+## How to Play
+
+At the beginning of the game, the game asked for a configuration file, there are already 4 map configurations ready to use :
+
+1. small.txt
+2. medium.txt
+3. large.txt
+4. extralarge.txt
+
+After you input your desired player names, the game will began, here are the commands available
+
+1. ROLL
+2. MAP
+3. INSPECT
+4. SKILL
+5. BUFF
+6. UNDO
+7. ENDTURN
+
+Each command details are in this (bahasa indonesia) [specification](https://docs.google.com/document/d/1XWxnjQnzXTIRdKlBelEWgc1iY9Jr1rDI1yqxjHCr6B8/edit)
+
+## Previews

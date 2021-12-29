@@ -53,7 +53,7 @@ void SetupGame(int numberOfPlayers){
     }
     GAME->GameStack = (Stack*) malloc (sizeof(Stack));
     GAME->GameStack->TOP = 0;
-    GAME->GameStack->round = (infotypeStack*) malloc (sizeof(infotypeStack) * 20);
+    GAME->GameStack->round = (infotypeStack*) malloc (sizeof(infotypeStack) * 30);
     Push(GAME->GameStack, FirstRound());
     // printPosisiTiapPemain(1);
 };
