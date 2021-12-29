@@ -1,45 +1,22 @@
-# Tubes-alstrukdat
+# Doraemonangis
 
-## Kelompok 14
+CLI (command line interface) based game written in c with features like : Map, teleports, skills, buffs, turn based with undo turn, load configuration from file.
 
-18220006 - Afkar Dhiya Ulhaq
+For further information, please check this [specification](https://docs.google.com/document/d/1XWxnjQnzXTIRdKlBelEWgc1iY9Jr1rDI1yqxjHCr6B8/edit)
 
-18220017 - Gratia Nindyaratri
+## Installation (windows)
 
-18220033 - Ayub Seipanya
+1. Download or clone this repository to your computer
+2. Open main.exe
 
-18220052 - Christopher Jie
+or you can build yourself with these steps
 
-18220053 - I Putu Andika Bagas Jiwanta
+1. Download or clone this repository to your computer
+2. Open the root directory using terminal
+3. Use this command
 
-## Links
+```
+gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/list/listlinier.c ./src/adt/stack/stack.c -o main
+```
 
-#### [spesifikasi](https://docs.google.com/document/d/1XWxnjQnzXTIRdKlBelEWgc1iY9Jr1rDI1yqxjHCr6B8/edit)
-
-#### [pembagian kelompok](https://docs.google.com/spreadsheets/d/1Fx_RR4-dQyG3h3XBkuxN-Hag7yqG9H7V4Y6J7VboUNk/edit#gid=1934939025)
-
-#### [pedoman](https://docs.google.com/document/d/151J4Ygi6WYV4vLgVEIRW4ZKeAKtV_ENZ/edit)
-
-#### [template laporan](https://docs.google.com/document/d/1ZJVdN1lX4unswZdTXNcFg4dAc_D3azsy/edit)
-
-#### [form asistensi](https://docs.google.com/document/d/1h2y8rJzt8ANMjggi-omuZMgKdb6i4b33/edit)
-
-#### [FAQ](https://docs.google.com/spreadsheets/d/1x8gRN62DG1BRMDyFFmQIkQuZEpNUeRpXVTaZmZqIBDA/edit#gid=0)
-
-## Command untuk run di windows
-
-#### gcc ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/list/listlinier.c ./src/adt/stack/stack.c -o main
-
-## Command untuk run di linux (untuk gcc versi x, ganti 'gcc' dengan 'gcc-x')
-
-### Build
-
-#### sudo gcc-5 ./src/adt/mesinkata/mesinkata.c ./src/adt/mesinkata/mesinkar.c ./src/functions.c ./src/main.c ./src/adt/map/map.c ./src/adt/list/listlinier.c ./src/adt/stack/stack.c -o main
-
-#### sudo chmod u+x ./main
-
-### Run
-
-#### ./main
-
-- bagas
+4. Open main.exe
