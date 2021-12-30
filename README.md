@@ -1,6 +1,6 @@
 # Mobitangga
 
-CLI (command line interface) based game written in c with features like : Map, teleports, skills, buffs, turn based with undo turn, load configuration from file.
+Snakes and Ladders (ular tangga) CLI based game written in c, with features like : Map, teleports, skills, buffs, turn based with undo turn, load configuration from file.
 
 For further information, please check this [specification](https://docs.google.com/document/d/1XWxnjQnzXTIRdKlBelEWgc1iY9Jr1rDI1yqxjHCr6B8/edit)
 
